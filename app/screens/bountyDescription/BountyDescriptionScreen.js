@@ -5,15 +5,17 @@ import {
     TouchableOpacity,
     Text,
     StyleSheet,
-    StatusBar,
     Image,
-    SafeAreaView
+    Dimensions,
+    TextInput
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Tags from "react-native-tags";
+import Modal from 'react-native-modalbox';
+import { WhiteSpace, Button } from '@ant-design/react-native';
 
-import TitleBar from '../components/TitleBar';
-import AppStatusBar from '../components/AppStatusBar';
+import TitleBar from '../../components/TitleBar';
+import AppStatusBar from '../../components/AppStatusBar';
 
 const CLAIM_BOUNTY_BUTTON_HEIGHT = 53;
 
@@ -25,7 +27,7 @@ export default class BountyDescriptionScreen extends Component {
                     <TouchableOpacity>
                         <Image
                             style={screenStyles.iconBack}
-                            source={require('../assets/ic_back.png')}
+                            source={require('../../assets/ic_back.png')}
                         />
                     </TouchableOpacity>
                 }
@@ -42,7 +44,7 @@ export default class BountyDescriptionScreen extends Component {
             <View style={screenStyles.descriptionHeader}>
                 <Image
                     style={screenStyles.descHeaderWallpaper}
-                    source={require('../assets/default_banner_game.jpg')}
+                    source={require('../../assets/default_banner_game.jpg')}
                     resizeMode='cover'
                 />
                 <View
@@ -51,8 +53,9 @@ export default class BountyDescriptionScreen extends Component {
                     <Text style={screenStyles.descHeaderInfoNormalText}>7 hours behind</Text>
                     <Text style={screenStyles.descHeaderInfoNormalText}>98% positive reviews (32)</Text>
                     <Text style={screenStyles.descHeaderInfoUsername}>Gamelancer Username</Text>
+                    <WhiteSpace />
                     <Image
-                        source={require('../assets/useravatar_demo.jpg')}
+                        source={require('../../assets/useravatar_demo.jpg')}
                         style={screenStyles.descHeaderInfoUserAvatar}
                         resizeMode='cover'
                     />
@@ -65,7 +68,9 @@ export default class BountyDescriptionScreen extends Component {
         return (
             <View>
                 <Text style={screenStyles.descJobTitle}>I will train you on Fortnite</Text>
+                <WhiteSpace size='sm'/>
                 <Text style={screenStyles.screenNormalText}>Fortnite, PC</Text>
+                <WhiteSpace />
                 <Tags
                     initialTags={["non-profit", "English"]}
                     onTagPress={(index, tagLabel, event, deleted) =>
@@ -115,7 +120,7 @@ export default class BountyDescriptionScreen extends Component {
         return (
             <TouchableOpacity
                 style={screenStyles.claimBountyButton}
-                onPress={() => alert("You clicked: Claim this Bounty")}
+                onPress={() => this.refs.modalVerifyEmail.open()}
             >
                 <Text style={screenStyles.claimBountyButtonText}>Claim this Bounty</Text>
             </TouchableOpacity>
@@ -131,6 +136,45 @@ export default class BountyDescriptionScreen extends Component {
                 {this._renderWhiteSpaceWithLine()}
                 {this._renderBountyDescJobContent()}
             </View>
+        );
+    }
+
+    _initVerifyEmailModal() {
+        return (
+            <Modal
+                ref={"modalVerifyEmail"}
+                swipeToClose={false}
+                position='bottom'
+                backButtonClose={true}
+                style={{ height: 400 }}
+            >
+                <View style={modalVerifyEmail.container}>
+                    <WhiteSpace size='xl'/>
+                    <WhiteSpace size="md"/>
+                    <Text style={modalVerifyEmail.verifyTitle}>Verify your Gamelancer account</Text>
+                    <WhiteSpace size="xl"/>
+                    <Text style={modalVerifyEmail.verifyMessage}>In order to claim a bounty you need to verify your account. The verification code will be sent to sample@mail.com</Text>
+                    <WhiteSpace size="xl"/>
+                    <WhiteSpace size="md"/>
+                    <TextInput
+                        style={modalVerifyEmail.codeInputText}
+                        placeholder="000 - 000"
+                    />
+                    <WhiteSpace size='lg'/>
+                    <Button
+                        activeStyle={modalVerifyEmail.subitButtonOnActive}
+                        style={modalVerifyEmail.submitButton}
+                    >
+                        <Text style={screenStyles.screenNormalText}>Submit</Text>
+                    </Button>
+                    <WhiteSpace />
+                    <Button
+                        style={modalVerifyEmail.resendCodeButton}
+                    >
+                        <Text>Resend Code</Text>
+                    </Button>
+                </View>
+            </Modal>
         );
     }
 
@@ -150,6 +194,7 @@ export default class BountyDescriptionScreen extends Component {
                         {this._renderBountyDescContent()}
                     </ScrollView>
                     {this._renderClaimBountyButton()}
+                    {this._initVerifyEmailModal()}
                 </LinearGradient>
             </View>
         );
@@ -227,13 +272,10 @@ const screenStyles = StyleSheet.create({
         color: 'white',
         fontSize: 20,
         fontWeight: 'bold',
-        marginBottom: 5,
-
     },
 
     descJobTag: {
         marginRight: 10,
-        marginVertical: 10,
         borderRadius: 5,
         paddingVertical: 3,
         paddingHorizontal: 10,
@@ -254,5 +296,56 @@ const screenStyles = StyleSheet.create({
         alignSelf: 'center',
         color: 'white',
         fontSize: 18
+    }
+});
+
+const modalVerifyEmail = StyleSheet.create({
+    container: {
+        height: '100%', 
+        backgroundColor: 'white', 
+        borderRadius: 10,
+        alignItems: 'center'
+    },
+
+    verifyTitle: {
+        color: 'black',
+        fontSize: 25,
+        textAlign: 'center',
+        marginHorizontal: 30,
+        fontWeight: 'bold',
+    },
+
+    verifyMessage: {
+        color: 'black',
+        textAlign: 'center',
+        marginHorizontal: 30
+    },
+
+    codeInputText: {
+        width: Dimensions.get('window').width - 40,
+        textAlign: 'center',
+        height: 45,
+        borderRadius: 10,
+        borderColor: 'gray',
+        borderWidth: StyleSheet.hairlineWidth
+    },
+
+    submitButton: {
+        width: Dimensions.get('window').width - 40,
+        height: 45,
+        borderRadius: 10,
+        backgroundColor: '#01254F',
+    },
+
+    subitButtonOnActive: {
+        backgroundColor: '#004aa0', 
+    },
+
+    resendCodeButton: {
+        width: Dimensions.get('window').width - 40,
+        height: 45,
+        borderRadius: 10,
+        borderColor: 'black',
+        borderWidth: StyleSheet.hairlineWidth
     }
 });
