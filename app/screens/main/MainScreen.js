@@ -1,21 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { Icon, TabBar } from '@ant-design/react-native';
-import TabBarItem from '@ant-design/react-native/lib/tab-bar/TabBarItem';
 
-export default class MainScreen extends Compoent {
+export default class MainScreen extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      selectedTab: 'redTab',
+      selectedTab: 'BountyList',
     };
   }
 
   renderContent(pageText) {
     return (
       <View style={{ flex: 1, alignItems: 'center', backgroundColor: 'white' }}>
-        <SearchBar placeholder="Search" showCancelButton />
         <Text style={{ margin: 50 }}>{pageText}</Text>
       </View>
     );
@@ -30,42 +28,43 @@ export default class MainScreen extends Compoent {
   render() {
     return (
       <TabBar
+        styles={{ flex: 1 }}
         unselectedTintColor="#949494"
         tintColor="#33A3F4"
         barTintColor="#f5f5f5"
         >
         <TabBar.Item
-          title="Life"
           icon={<Icon name="home" />}
-          selected={this.state.selectedTab === 'blueTab'}
-          onPress={() => this.onChangeTab('blueTab')}
+          selected={this.state.selectedTab === 'BountyList'}
+          onPress={() => this.onChangeTab('BountyList')}
+          style={{ justifyContent: 'center'}}
         >
-          {this.renderContent('Life Tab')}
+          {this.renderContent('BountyList')}
         </TabBar.Item>
+
         <TabBar.Item
           icon={<Icon name="ordered-list" />}
-          title="Koubei"
-          badge={2}
-          selected={this.state.selectedTab === 'redTab'}
-          onPress={() => this.onChangeTab('redTab')}
+          selected={this.state.selectedTab === 'GamelancerLadder'}
+          onPress={() => this.onChangeTab('GamelancerLadder')}
         >
-          {this.renderContent('Koubei Tab')}
+          {this.renderContent('GamelancerLadder')}
         </TabBar.Item>
+
         <TabBar.Item
-          icon={<Icon name="like" />}
-          title="Friend"
-          selected={this.state.selectedTab === 'greenTab'}
-          onPress={() => this.onChangeTab('greenTab')}
+          icon={<Icon name="message" />}
+          badge={2}
+          selected={this.state.selectedTab === 'Chats'}
+          onPress={() => this.onChangeTab('Chats')}
         >
-          {this.renderContent('Friend Tab')}
+          {this.renderContent('Chats')}
         </TabBar.Item>
+        
         <TabBar.Item
           icon={<Icon name="user" />}
-          title="My"
-          selected={this.state.selectedTab === 'yellowTab'}
-          onPress={() => this.onChangeTab('yellowTab')}
+          selected={this.state.selectedTab === 'User'}
+          onPress={() => this.onChangeTab('User')}
         >
-          {this.renderContent('My Tab')}
+          {this.renderContent('User')}
         </TabBar.Item>
       </TabBar>
     );
