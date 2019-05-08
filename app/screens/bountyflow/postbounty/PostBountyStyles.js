@@ -1,0 +1,151 @@
+import {
+    Platform,
+    StatusBar,
+    Dimensions,
+    StyleSheet
+} from 'react-native';
+
+
+const { width, height } = Dimensions.get('screen');
+
+const PostBountyStyles = StyleSheet.create({
+    container: {
+        flex: 1,
+        backgroundColor: '#F5F5F5'
+    },
+    header: {
+        width: width,
+        height: 56,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: '#FFFFFF',
+        paddingLeft: 20,
+        borderWidth: 1,
+        borderColor: '#D5D6D8'
+    },
+    body: {
+        flex: 1,
+        flexDirection: 'column',
+        paddingLeft: 20,
+        paddingRight: 20,
+    },
+    platform: {
+        width: width,
+        flexDirection: 'column',
+        marginTop: 20
+    },
+    itemPlatform: {
+        width: width,
+        flexDirection: 'row'
+    },
+    thumbnail: {
+        width: width - 40,
+        height: 70,
+        marginTop: 10,
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: '#D0D1D3',
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: 'gray',
+    },
+    buttonPost: {
+        bottom: 0,
+        width: width,
+        height: 50,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: 'gray',
+        backgroundColor: '#DFDFDF'
+    },
+    inputTitle: {
+        width: width - 40,
+        height: 50,
+        marginTop: 4,
+        marginBottom: 4,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: 'gray',
+        backgroundColor: 'white'
+    },
+    title: {
+        width: width - 40,
+        marginTop: 10,
+        flexDirection: 'column'
+    },
+    itemService: {
+        width: width / 2 - 30,
+        height: 44,
+        flexDirection: 'row',
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: 'gray',
+        paddingLeft: 10,
+        alignItems: 'center'
+    },
+    priceSession: {
+        width: width - 40,
+        flexDirection: 'row',
+        marginTop: 20,
+        alignItems: 'center',
+        justifyContent: 'space-between'
+    },
+    price: {
+        width: width / 2 - 30,
+        flexDirection: 'column',
+    },
+    inputPrice: {
+        width: width / 2 - 30,
+        height: 50,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: 'gray',
+        backgroundColor: 'white',
+        marginTop: 10,
+        textAlign: 'right'
+
+    },
+    receive: {
+        width: width / 2 - 30,
+        flexDirection: 'column'
+    },
+    line: {
+        width: width / 2 - 30,
+        height: 1,
+        backgroundColor: 'black',
+        marginBottom: 10,
+        marginTop: 10,
+    },
+    inputCause: {
+        width: width - 120,
+        height: 50,
+        marginTop: 4,
+        marginBottom: 4,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: 'gray',
+        backgroundColor: 'white',
+        paddingLeft: 10,
+    },
+    inputDonate: {
+        width: 60,
+        height: 50,
+        marginTop: 4,
+        marginBottom: 4,
+        borderRadius: 5,
+        borderWidth: 1,
+        borderColor: 'gray',
+        backgroundColor: 'white',
+        marginLeft: 20,
+        textAlign: 'center'
+    },
+    textOpacity: {
+        color: 'gray',
+        fontSize: 12,
+        textAlign: 'center',
+        marginTop: 5
+    }
+});
+
+export default PostBountyStyles;
