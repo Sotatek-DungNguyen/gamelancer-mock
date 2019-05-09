@@ -145,6 +145,29 @@ const PostBountyStyles = StyleSheet.create({
         fontSize: 12,
         textAlign: 'center',
         marginTop: 5
+    },
+    buttonRemove_Save: {
+        width: width / 2 - 20,
+        height: 60,
+        alignItems: 'center',
+        justifyContent: 'center',
+        borderWidth: 1,
+        borderColor: 'gray'
+    },
+    buttonRemoveSaveContainer: {
+        width: width,
+        alignItems: 'center',
+        justifyContent: 'space-around',
+        padding: 10,
+        flexDirection: 'row'
+    },
+    modalRemove: {
+        width: width,
+        height: 200,
+        flexDirection: 'column',
+        padding: 10,
+        alignItems: 'center',
+        justifyContent: 'center'
     }
 });
 

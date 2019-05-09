@@ -55,13 +55,24 @@ const SearchStyles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         margin: 5,
-        borderWidth: 1,
+        // borderWidth: 1,
+        // borderColor: 'rgba(24,255,255 ,1)'
+
+    },
+    itemSelected: {
+        height: height / 5,
+        flex: 1,
+        flexDirection: 'column',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: 5,
+        borderWidth: 2,
         borderColor: 'rgba(24,255,255 ,1)'
 
     },
     imageGame: {
         width: width / 3 - 19,
-        height: height / 5 - 2,
+        height: height / 5 - 4,
         margin: 1
     },
     titleGame: {
@@ -70,7 +81,9 @@ const SearchStyles = StyleSheet.create({
         bottom: 0,
         backgroundColor: 'rgba(236,239,241 ,0.5)',
         color: 'white',
-        textAlign: 'center'
+        textAlign: 'center',
+        fontSize: 12,
+        fontWeight: 'bold'
     },
     iconSearch: {
         width: 20,

@@ -8,10 +8,12 @@ import {
     StyleSheet,
     TouchableOpacity,
 } from 'react-native';
+import Modal from 'react-native-modalbox';
+
 import PostBountyStyles from './PostBountyStyles';
 import ItemPlatform from './ItemPlatform';
 
-export default class PostBountyScreen extends Component {
+export default class EditBountyScreen extends Component {
     constructor(props) {
         super(props)
     }
@@ -49,8 +51,30 @@ export default class PostBountyScreen extends Component {
             </TouchableOpacity>
     }
 
-    _postBounty = () => {
+    _renderModalRemove() {
+        return (
+            <Modal
+                ref={"modalRemove"}
+                swipeToClose={false}
+                position='bottom'
+                backButtonClose={false}
+                style={PostBountyStyles.modalRemove}
+            >
+                <Text style={{ fontWeight: 'bold' }}>Are you sure you want</Text>
+                <Text style={{ fontWeight: 'bold' }}>to remove this bounty?</Text>
+
+                <View style={[PostBountyStyles.buttonRemoveSaveContainer, { top: 30 }]}>
+                    <TouchableOpacity style={PostBountyStyles.buttonRemove_Save}>
+                        <Text style={{ fontSize: 18 }}>Remove Bounty</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[PostBountyStyles.buttonRemove_Save, { backgroundColor: '#E0E0E0' }]}>
+                        <Text style={{ fontSize: 18 }}>Cancel</Text>
+                    </TouchableOpacity>
+                </View>
+            </Modal >
+        )
     }
+
     render() {
         return (
             <View style={PostBountyStyles.container}>
@@ -87,22 +111,11 @@ export default class PostBountyScreen extends Component {
                             <TouchableOpacity style={PostBountyStyles.thumbnail}>
                                 <Text style={{ color: 'black', fontSize: 16 }}>Upload a thumbnail</Text>
                             </TouchableOpacity>
-                            <Text style={PostBountyStyles.textOpacity}>
-                                Bounties with s custom thumbnail rank higher
-                            </Text>
                         </View>
 
                         {/* title */}
                         <View style={PostBountyStyles.title}>
                             <Text style={{ fontSize: 14, color: 'black' }}>Title</Text>
-                            <TextInput
-                                numberOfLines={1}
-                                style={PostBountyStyles.inputTitle} />
-                        </View>
-
-                        {/* Description */}
-                        <View style={PostBountyStyles.title}>
-                            <Text style={{ fontSize: 14, color: 'black' }}>Description</Text>
                             <TextInput
                                 numberOfLines={1}
                                 style={PostBountyStyles.inputTitle} />
@@ -141,64 +154,23 @@ export default class PostBountyScreen extends Component {
                                 />
                             </View>
                         </View>
-
-                        {/* Receive */}
-                        <View style={PostBountyStyles.receive}>
-
-                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                                <Text style={{ color: 'black', fontSize: 12 }}>You receive   </Text>
-                                <Image source={require('../../../assets/ic_bounty_flow/question.png')} />
-                                <Text style={{ color: 'black', fontSize: 12, textAlign: 'right', flex: 1 }}> $28.80/hr</Text>
-                            </View>
-
-                            <View style={PostBountyStyles.line} />
-
-                            <View style={{ flexDirection: 'row', marginTop: 10 }}>
-                                <Text style={{ color: 'black', fontSize: 12 }}>10% Fee   </Text>
-                                <Image source={require('../../../assets/ic_bounty_flow/question.png')} />
-                                <Text style={{ marginLeft: 20, color: 'black', fontSize: 12, textAlign: 'right', flex: 1 }}> $3.2/hr</Text>
-                            </View>
-
-                        </View>
-
-                        {/* Donate to a charity */}
-                        <View style={PostBountyStyles.title}>
-                            <Text style={{
-                                fontSize: 14,
-                                color: 'black',
-                                marginTop: 20
-                            }}>
-                                Want to donate to a charity?
-                            </Text>
-                            <View style={{ flexDirection: 'row', marginTop: 5 }}>
-                                <TextInput
-                                    placeholder='Select a cause'
-                                    placeholderTextColor='gray'
-                                    numberOfLines={1}
-                                    style={PostBountyStyles.inputCause}
-                                />
-                                <TextInput
-                                    style={PostBountyStyles.inputDonate}
-                                    placeholder='25%'
-                                    placeholderTextColor='gray'
-                                />
-                            </View>
-                            <Text style={PostBountyStyles.textOpacity}>
-                                We charge only transactional costs for charitable bounties
-                            </Text>
-                        </View>
                         <View style={{ height: 10 }}></View>
                     </ScrollView>
                 </View>
+                {/* Button Remove - Save */}
+                <View style={PostBountyStyles.buttonRemoveSaveContainer}>
+                    <TouchableOpacity
+                        onPress={() => this.refs.modalRemove.open()}
+                        style={PostBountyStyles.buttonRemove_Save}
+                    >
+                        <Text style={{ fontSize: 18 }}>Remove Bounty</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={[PostBountyStyles.buttonRemove_Save, { backgroundColor: '#E0E0E0' }]}>
+                        <Text style={{ fontSize: 18 }}>Save</Text>
+                    </TouchableOpacity>
+                </View>
 
-                {/* Button Post Bounty */}
-                <TouchableOpacity
-                    onPress={() => this._postBounty()}
-                    style={PostBountyStyles.buttonPost}
-                >
-                    <Text style={{ fontSize: 20, color: 'black' }}>Post Bounty</Text>
-                </TouchableOpacity>
-
+                {this._renderModalRemove()}
             </View >
         );
     }

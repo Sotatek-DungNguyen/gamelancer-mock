@@ -1,15 +1,19 @@
 import SearchGameScreen from './search';
 import PostBountyScreen from './postbounty';
+import EditBountyScreen from './postbounty/EditBountyScreen';
+import HomeScreen from './Home';
 
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 const BountyStack = createStackNavigator(
     {
+        Home: HomeScreen,
         Search: SearchGameScreen,
-        Post: PostBountyScreen
+        Post: PostBountyScreen,
+        Edit: EditBountyScreen,
     },
     {
-        initialRouteName: 'Search',
+        initialRouteName: 'Home',
         headerMode: 'none'
     }
 );
