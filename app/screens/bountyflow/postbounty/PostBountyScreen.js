@@ -74,7 +74,7 @@ export default class PostBountyScreen extends Component {
                     >
                         {/* Platform */}
                         <View style={PostBountyStyles.platform}>
-                            <Text style={{ color: 'black', fontSize: 18 }}>Platform</Text>
+                            <Text style={PostBountyStyles.largText}>Platform</Text>
                             <View style={PostBountyStyles.itemPlatform}>
                                 <ItemPlatform title='PS4' />
                                 <ItemPlatform title='Xbox One' />
@@ -85,7 +85,7 @@ export default class PostBountyScreen extends Component {
                         {/* thumbnail */}
                         <View >
                             <TouchableOpacity style={PostBountyStyles.thumbnail}>
-                                <Text style={{ color: 'black', fontSize: 16 }}>Upload a thumbnail</Text>
+                                <Text style={PostBountyStyles.normalText}>Upload a thumbnail</Text>
                             </TouchableOpacity>
                             <Text style={PostBountyStyles.textOpacity}>
                                 Bounties with s custom thumbnail rank higher
@@ -94,7 +94,7 @@ export default class PostBountyScreen extends Component {
 
                         {/* title */}
                         <View style={PostBountyStyles.title}>
-                            <Text style={{ fontSize: 14, color: 'black' }}>Title</Text>
+                            <Text style={PostBountyStyles.normalText}>Title</Text>
                             <TextInput
                                 numberOfLines={1}
                                 style={PostBountyStyles.inputTitle} />
@@ -102,7 +102,7 @@ export default class PostBountyScreen extends Component {
 
                         {/* Description */}
                         <View style={PostBountyStyles.title}>
-                            <Text style={{ fontSize: 14, color: 'black' }}>Description</Text>
+                            <Text style={PostBountyStyles.normalText}>Description</Text>
                             <TextInput
                                 numberOfLines={1}
                                 style={PostBountyStyles.inputTitle} />
@@ -110,15 +110,15 @@ export default class PostBountyScreen extends Component {
 
                         {/* Service */}
                         <View style={PostBountyStyles.title}>
-                            <Text style={{ fontSize: 14, color: 'black' }}>Service</Text>
+                            <Text style={PostBountyStyles.normalText}>Service</Text>
                             <View style={{ alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', marginTop: 10 }}>
                                 <View style={PostBountyStyles.itemService}>
                                     {this._showRadioButton(this.state.isTraining)}
-                                    <Text style={{ color: 'black' }}> Training</Text>
+                                    <Text style={PostBountyStyles.normalText}> Training</Text>
                                 </View>
                                 <View style={PostBountyStyles.itemService}>
                                     {this._showRadioButton(this.state.isPlayAlong)}
-                                    <Text style={{ color: 'black' }}>Play along</Text>
+                                    <Text style={PostBountyStyles.normalText}>Play along</Text>
                                 </View>
                             </View>
                         </View>
@@ -126,7 +126,7 @@ export default class PostBountyScreen extends Component {
                         {/* Price/hr - Session time */}
                         <View style={PostBountyStyles.priceSession}>
                             <View style={PostBountyStyles.price}>
-                                <Text style={{ fontSize: 14, color: 'black' }}>Price/hr</Text>
+                                <Text style={PostBountyStyles.normalText}>Price/hr</Text>
                                 <TextInput
                                     placeholder='$32'
                                     placeholderTextColor='gray'
@@ -134,7 +134,7 @@ export default class PostBountyScreen extends Component {
                                     style={PostBountyStyles.inputPrice} />
                             </View>
                             <View style={PostBountyStyles.price}>
-                                <Text style={{ fontSize: 14, color: 'black' }}>Session time</Text>
+                                <Text style={PostBountyStyles.normalText}>Session time</Text>
                                 <TextInput
                                     numberOfLines={1}
                                     style={PostBountyStyles.inputPrice}
@@ -148,7 +148,7 @@ export default class PostBountyScreen extends Component {
                             <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                 <Text style={{ color: 'black', fontSize: 12 }}>You receive   </Text>
                                 <Image source={require('../../../assets/ic_bounty_flow/question.png')} />
-                                <Text style={{ color: 'black', fontSize: 12, textAlign: 'right', flex: 1 }}> $28.80/hr</Text>
+                                <Text style={PostBountyStyles.textMoney}> $28.80/hr</Text>
                             </View>
 
                             <View style={PostBountyStyles.line} />
@@ -156,18 +156,14 @@ export default class PostBountyScreen extends Component {
                             <View style={{ flexDirection: 'row', marginTop: 10 }}>
                                 <Text style={{ color: 'black', fontSize: 12 }}>10% Fee   </Text>
                                 <Image source={require('../../../assets/ic_bounty_flow/question.png')} />
-                                <Text style={{ marginLeft: 20, color: 'black', fontSize: 12, textAlign: 'right', flex: 1 }}> $3.2/hr</Text>
+                                <Text style={PostBountyStyles.textMoney}> $3.2/hr</Text>
                             </View>
 
                         </View>
 
                         {/* Donate to a charity */}
                         <View style={PostBountyStyles.title}>
-                            <Text style={{
-                                fontSize: 14,
-                                color: 'black',
-                                marginTop: 20
-                            }}>
+                            <Text style={[PostBountyStyles.normalText, { marginTop: 20 }]}>
                                 Want to donate to a charity?
                             </Text>
                             <View style={{ flexDirection: 'row', marginTop: 5 }}>
@@ -196,7 +192,7 @@ export default class PostBountyScreen extends Component {
                     onPress={() => this._postBounty()}
                     style={PostBountyStyles.buttonPost}
                 >
-                    <Text style={{ fontSize: 20, color: 'black' }}>Post Bounty</Text>
+                    <Text style={PostBountyStyles.largText}>Post Bounty</Text>
                 </TouchableOpacity>
 
             </View >

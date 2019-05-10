@@ -164,10 +164,33 @@ const PostBountyStyles = StyleSheet.create({
     modalRemove: {
         width: width,
         height: 200,
+        bottom: 0,
         flexDirection: 'column',
         padding: 10,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
+        backgroundColor: 'white'
+    },
+    normalText: {
+        fontSize: 14,
+        color: 'black'
+    },
+    largText: {
+        fontSize: 18,
+        color: 'black'
+    },
+    textMoney: {
+        color: 'black',
+        fontSize: 12,
+        textAlign: 'right',
+        flex: 1
+    },
+    modalRemoveContainer: {
+        flex: 1,
+        marginTop: 56,
+        backgroundColor: 'rgba(0,0,0,0.6)',
+        // alignItems: 'flex-end',
+        justifyContent: 'flex-end'
     }
 });
 

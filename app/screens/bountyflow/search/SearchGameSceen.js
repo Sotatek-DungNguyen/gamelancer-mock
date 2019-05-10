@@ -46,7 +46,6 @@ export default class SearchGameSceen extends Component {
         >
             <Image style={SearchStyles.imageGame} source={item.image} />
             <Text style={SearchStyles.titleGame}>{item.name}</Text>
-            {/* <Image style={{ position: 'absolute', bottom: 4, right: 4 }} source={require('../../../assets/ic_bounty_flow/circle_tick.png')} /> */}
             {this._showIconSelect(item.isSelect)}
         </TouchableOpacity>
     )

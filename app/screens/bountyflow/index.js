@@ -2,6 +2,7 @@ import SearchGameScreen from './search';
 import PostBountyScreen from './postbounty';
 import EditBountyScreen from './postbounty/EditBountyScreen';
 import HomeScreen from './Home';
+import PaymentModal from '../bountyflow/components/PaymentModal';
 
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
@@ -11,6 +12,7 @@ const BountyStack = createStackNavigator(
         Search: SearchGameScreen,
         Post: PostBountyScreen,
         Edit: EditBountyScreen,
+        Pay: PaymentModal
     },
     {
         initialRouteName: 'Home',

@@ -3,12 +3,13 @@ import {
     View,
     Text,
     Image,
+    Modal,
     TextInput,
     ScrollView,
     StyleSheet,
     TouchableOpacity,
+    TouchableWithoutFeedback
 } from 'react-native';
-import Modal from 'react-native-modalbox';
 
 import PostBountyStyles from './PostBountyStyles';
 import ItemPlatform from './ItemPlatform';
@@ -19,7 +20,8 @@ export default class EditBountyScreen extends Component {
     }
     state = {
         isTraining: true,
-        isPlayAlong: false
+        isPlayAlong: false,
+        modalRemoveVisible: false
     }
 
     _selectService = () => {
@@ -50,28 +52,44 @@ export default class EditBountyScreen extends Component {
                 <Image source={require('../../../assets/ic_bounty_flow/circle_outline2.png')} />
             </TouchableOpacity>
     }
+    _setVisibleRemoveModal = (visible) => {
+        this.setState({
+            modalRemoveVisible: visible
+        })
+    }
 
-    _renderModalRemove() {
+    _renderRemoveBountyModal = () => {
         return (
             <Modal
-                ref={"modalRemove"}
-                swipeToClose={false}
-                position='bottom'
-                backButtonClose={false}
-                style={PostBountyStyles.modalRemove}
-            >
-                <Text style={{ fontWeight: 'bold' }}>Are you sure you want</Text>
-                <Text style={{ fontWeight: 'bold' }}>to remove this bounty?</Text>
-
-                <View style={[PostBountyStyles.buttonRemoveSaveContainer, { top: 30 }]}>
-                    <TouchableOpacity style={PostBountyStyles.buttonRemove_Save}>
-                        <Text style={{ fontSize: 18 }}>Remove Bounty</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={[PostBountyStyles.buttonRemove_Save, { backgroundColor: '#E0E0E0' }]}>
-                        <Text style={{ fontSize: 18 }}>Cancel</Text>
-                    </TouchableOpacity>
-                </View>
-            </Modal >
+                animationType="none"
+                transparent={true}
+                visible={this.state.modalRemoveVisible}
+                onRequestClose={() => {
+                    Alert.alert('Modal has been closed.');
+                }}>
+                <TouchableOpacity
+                    onPressOut={() => this._setVisibleRemoveModal(false)}
+                    style={PostBountyStyles.modalRemoveContainer}
+                >
+                    <TouchableWithoutFeedback>
+                        <View style={PostBountyStyles.modalRemove}>
+                            <Text style={{ fontWeight: 'bold' }}>Are you sure you want</Text>
+                            <Text style={{ fontWeight: 'bold' }}>to remove this bounty?</Text>
+                            <View style={[PostBountyStyles.buttonRemoveSaveContainer, { top: 30 }]}>
+                                <TouchableOpacity style={PostBountyStyles.buttonRemove_Save}>
+                                    <Text style={PostBountyStyles.largText}>Remove Bounty</Text>
+                                </TouchableOpacity>
+                                <TouchableOpacity
+                                    onPress={() => this._setVisibleRemoveModal(false)}
+                                    style={[PostBountyStyles.buttonRemove_Save, { backgroundColor: '#E0E0E0' }]}
+                                >
+                                    <Text style={PostBountyStyles.largText}>Cancel</Text>
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                    </TouchableWithoutFeedback>
+                </TouchableOpacity>
+            </Modal>
         )
     }
 
@@ -98,7 +116,7 @@ export default class EditBountyScreen extends Component {
                     >
                         {/* Platform */}
                         <View style={PostBountyStyles.platform}>
-                            <Text style={{ color: 'black', fontSize: 18 }}>Platform</Text>
+                            <Text style={PostBountyStyles.largText}>Platform</Text>
                             <View style={PostBountyStyles.itemPlatform}>
                                 <ItemPlatform title='PS4' />
                                 <ItemPlatform title='Xbox One' />
@@ -109,13 +127,13 @@ export default class EditBountyScreen extends Component {
                         {/* thumbnail */}
                         <View >
                             <TouchableOpacity style={PostBountyStyles.thumbnail}>
-                                <Text style={{ color: 'black', fontSize: 16 }}>Upload a thumbnail</Text>
+                                <Text style={PostBountyStyles.normalText}>Upload a thumbnail</Text>
                             </TouchableOpacity>
                         </View>
 
                         {/* title */}
                         <View style={PostBountyStyles.title}>
-                            <Text style={{ fontSize: 14, color: 'black' }}>Title</Text>
+                            <Text style={PostBountyStyles.normalText}>Title</Text>
                             <TextInput
                                 numberOfLines={1}
                                 style={PostBountyStyles.inputTitle} />
@@ -123,7 +141,7 @@ export default class EditBountyScreen extends Component {
 
                         {/* Service */}
                         <View style={PostBountyStyles.title}>
-                            <Text style={{ fontSize: 14, color: 'black' }}>Service</Text>
+                            <Text style={PostBountyStyles.normalText}>Service</Text>
                             <View style={{ alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', marginTop: 10 }}>
                                 <View style={PostBountyStyles.itemService}>
                                     {this._showRadioButton(this.state.isTraining)}
@@ -139,7 +157,7 @@ export default class EditBountyScreen extends Component {
                         {/* Price/hr - Session time */}
                         <View style={PostBountyStyles.priceSession}>
                             <View style={PostBountyStyles.price}>
-                                <Text style={{ fontSize: 14, color: 'black' }}>Price/hr</Text>
+                                <Text style={PostBountyStyles.normalText}>Price/hr</Text>
                                 <TextInput
                                     placeholder='$32'
                                     placeholderTextColor='gray'
@@ -147,7 +165,7 @@ export default class EditBountyScreen extends Component {
                                     style={PostBountyStyles.inputPrice} />
                             </View>
                             <View style={PostBountyStyles.price}>
-                                <Text style={{ fontSize: 14, color: 'black' }}>Session time</Text>
+                                <Text style={PostBountyStyles.normalText}>Session time</Text>
                                 <TextInput
                                     numberOfLines={1}
                                     style={PostBountyStyles.inputPrice}
@@ -160,17 +178,17 @@ export default class EditBountyScreen extends Component {
                 {/* Button Remove - Save */}
                 <View style={PostBountyStyles.buttonRemoveSaveContainer}>
                     <TouchableOpacity
-                        onPress={() => this.refs.modalRemove.open()}
+                        onPress={() => this._setVisibleRemoveModal(true)}
                         style={PostBountyStyles.buttonRemove_Save}
                     >
-                        <Text style={{ fontSize: 18 }}>Remove Bounty</Text>
+                        <Text style={PostBountyStyles.largText}>Remove Bounty</Text>
                     </TouchableOpacity>
                     <TouchableOpacity style={[PostBountyStyles.buttonRemove_Save, { backgroundColor: '#E0E0E0' }]}>
-                        <Text style={{ fontSize: 18 }}>Save</Text>
+                        <Text style={PostBountyStyles.largText}>Save</Text>
                     </TouchableOpacity>
                 </View>
 
-                {this._renderModalRemove()}
+                {this._renderRemoveBountyModal()}
             </View >
         );
     }

@@ -4,7 +4,8 @@ import {
     Dimensions,
     StyleSheet
 } from 'react-native';
-
+import colors from '../Colors';
+import FontSize from '../FontSize';
 
 const { width, height } = Dimensions.get('screen');
 
@@ -17,11 +18,11 @@ const SearchStyles = StyleSheet.create({
         height: 56,
         flexDirection: 'row',
         alignItems: 'center',
-        backgroundColor: '#01254B'
+        backgroundColor: colors.DARK_BLUE_2,
     },
     body: {
         flex: 1,
-        backgroundColor: '#164980'
+        backgroundColor: colors.DARK_BLUE_1
     },
     inputSearch: {
         flex: 1,
@@ -36,7 +37,7 @@ const SearchStyles = StyleSheet.create({
         bottom: 0,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#164980',
+        backgroundColor: colors.DARK_BLUE_1,
     },
     buttonNext: {
         width: width - 20,
@@ -44,9 +45,9 @@ const SearchStyles = StyleSheet.create({
         margin: 10,
         alignItems: 'center',
         justifyContent: 'center',
-        backgroundColor: '#164980',
+        backgroundColor: colors.DARK_BLUE_1,
         borderWidth: 2,
-        borderColor: 'rgba(24,255,255 ,1)'
+        borderColor: colors.AQUA
     },
     item: {
         height: height / 5,
@@ -92,7 +93,7 @@ const SearchStyles = StyleSheet.create({
         marginLeft: 20
     },
     nextText: {
-        color: 'rgba(24,255,255 ,1)'
+        color: colors.AQUA
     }
 });
 

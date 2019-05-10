@@ -12,7 +12,7 @@ export default class ItemPlatform extends Component {
                 <TouchableOpacity style={{ width: 60, height: 34, borderWidth: 1, marginTop: 10, marginRight: 5, alignItems: 'center', justifyContent: 'center', backgroundColor: '#D0D1D3' }}>
                     <Text>icon</Text>
                 </TouchableOpacity>
-                <Text style={{ textAlign: 'center', fontSize: 14, marginTop: 5 }}>{this.props.title}</Text>
+                <Text style={{ textAlign: 'center', fontSize: 14, marginTop: 5,color:'black' }}>{this.props.title}</Text>
             </View>
         );
     }
