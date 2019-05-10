@@ -37,7 +37,7 @@ export default class ChatsScreen extends Component {
               <Text style={{ color: 'white' }}>1</Text>
             </View>
             <Text style={{ fontSize: 10}}>14:02</Text>
-        </View>
+          </View>
         ): null }
       </View>
     );

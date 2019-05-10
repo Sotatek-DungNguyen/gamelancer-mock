@@ -87,7 +87,6 @@ const styles = StyleSheet.create({
   header: {
     height: 56,
     justifyContent: 'center',
-    padding: 16
   },
   bounties: {
     flex: 1,
