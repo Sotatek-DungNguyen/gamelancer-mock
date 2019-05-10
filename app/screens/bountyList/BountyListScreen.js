@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Dimensions, TouchableOpacity } from 'react-native';
 
-const { width, height } = Dimensions.get('screen');
 export default class BountyListScreen extends Component {
   constructor(props){
     super(props);
