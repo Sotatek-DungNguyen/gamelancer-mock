@@ -6,14 +6,25 @@ import {
 
 export default class TitleBar extends Component {
     render() {
-        const { leading, title, trailing, backgroundColor } = this.props;
+        const {
+            leading, title, trailing, backgroundColor, underline = false, underlineColor = "transparent"
+        } = this.props;
         return (
-            <View style={[screenStyles.container, { backgroundColor }]}>
-                <View style={{ flexDirection: 'row' }}>
-                    <View style={screenStyles.leadingDefault}>{leading}</View>
-                    <View style={screenStyles.titleDefault}>{title}</View>
+            <View>
+                <View style={[screenStyles.container, { backgroundColor }]}>
+                    <View style={{ flexDirection: 'row' }}>
+                        <View style={screenStyles.leadingDefault}>{leading}</View>
+                        <View style={screenStyles.titleDefault}>{title}</View>
+                    </View>
+                    <View style={screenStyles.trailingDefault}>{trailing}</View>
                 </View>
-                <View style={screenStyles.trailingDefault}>{trailing}</View>
+                {
+                    underline
+                        ? <View
+                            style={{ height: StyleSheet.hairlineWidth, backgroundColor: underlineColor }}
+                        />
+                        : null
+                }
             </View>
         );
     }
@@ -26,7 +37,7 @@ const screenStyles = StyleSheet.create({
         flexDirection: 'row',
         justifyContent: 'space-between'
     },
-    
+
     leadingDefault: {
         margin: 10,
         justifyContent: 'center',

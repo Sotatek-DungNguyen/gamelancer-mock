@@ -12,14 +12,41 @@ import {
 import LinearGradient from 'react-native-linear-gradient';
 import Tags from "react-native-tags";
 import Modal from 'react-native-modalbox';
-import { WhiteSpace, Button } from '@ant-design/react-native';
+import { WhiteSpace, Button, Provider } from '@ant-design/react-native';
+import { Modal as AntDesignModal } from '@ant-design/react-native';
 
 import TitleBar from '../../components/TitleBar';
 import AppStatusBar from '../../components/AppStatusBar';
+import VerifyAccountModal from './VerifyAccountModal';
+import ClaimBountyModal from './ClaimBountyModal';
 
 const CLAIM_BOUNTY_BUTTON_HEIGHT = 53;
 
 export default class BountyDescriptionScreen extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+            showClaimBountyModalContent: false,
+            addPaymentModalHeight: 200,
+        }
+    }
+
+    //ClaimBountyModal contains Swiper in its content view, which wont show inside modal.
+    //Call this to rerender Swiper after Modal has showed or data has loaded to fix this problem.
+    _showClaimBountyModalContent = () => {
+        setTimeout(() => {
+            this.setState({
+                showClaimBountyModalContent: true,
+            });
+        }, 100);
+    }
+
+    _hideClaimBountyModalContent = () => {
+        this.setState({
+            showClaimBountyModalContent: false,
+        });
+    }
+
     _renderTitleBar() {
         return (
             <TitleBar
@@ -68,7 +95,7 @@ export default class BountyDescriptionScreen extends Component {
         return (
             <View>
                 <Text style={screenStyles.descJobTitle}>I will train you on Fortnite</Text>
-                <WhiteSpace size='sm'/>
+                <WhiteSpace size='sm' />
                 <Text style={screenStyles.screenNormalText}>Fortnite, PC</Text>
                 <WhiteSpace />
                 <Tags
@@ -148,39 +175,70 @@ export default class BountyDescriptionScreen extends Component {
                 backButtonClose={true}
                 style={{ height: 400 }}
             >
-                <View style={modalVerifyEmail.container}>
-                    <WhiteSpace size='xl'/>
-                    <WhiteSpace size="md"/>
-                    <Text style={modalVerifyEmail.verifyTitle}>Verify your Gamelancer account</Text>
-                    <WhiteSpace size="xl"/>
-                    <Text style={modalVerifyEmail.verifyMessage}>In order to claim a bounty you need to verify your account. The verification code will be sent to sample@mail.com</Text>
-                    <WhiteSpace size="xl"/>
-                    <WhiteSpace size="md"/>
-                    <TextInput
-                        style={modalVerifyEmail.codeInputText}
-                        placeholder="000 - 000"
-                    />
-                    <WhiteSpace size='lg'/>
-                    <Button
-                        activeStyle={modalVerifyEmail.subitButtonOnActive}
-                        style={modalVerifyEmail.submitButton}
-                    >
-                        <Text style={screenStyles.screenNormalText}>Submit</Text>
-                    </Button>
-                    <WhiteSpace />
-                    <Button
-                        style={modalVerifyEmail.resendCodeButton}
-                    >
-                        <Text>Resend Code</Text>
-                    </Button>
-                </View>
+                <VerifyAccountModal
+                    onClickSubmitCode={() => {
+                        this.refs.modalVerifyEmail.close();
+                        this.refs.modalClaimBounty.open();
+                        this._showClaimBountyModalContent();
+                    }}
+                    onClickResendCode={() => alert("Resend Code")}
+                />
+            </Modal>
+        );
+    }
+
+    _initClaimBountyModal() {
+        const { showClaimBountyModalContent } = this.state;
+        let modalContent = (
+            <ClaimBountyModal
+                onClickDismiss={() => {
+                    this.refs.modalClaimBounty.close();
+                    this._hideClaimBountyModalContent();
+                }}
+                onClickAddPayment={() => this.refs.modalAddPayment.open()}
+            />
+        );
+        return (
+            <Modal
+                ref={"modalClaimBounty"}
+                backdropPressToClose={false}
+                swipeToClose={false}
+                position='bottom'
+                backButtonClose={true}
+                onClosed={this._hideClaimBountyModalContent}
+                style={{ height: 400 }}
+            >
+                {
+                    showClaimBountyModalContent ? modalContent : null
+                }
+            </Modal>
+        );
+    }
+
+    _initModalAddPayment() {
+        const { addPaymentModalHeight } = this.state;
+        return (
+            <Modal
+                ref={'modalAddPayment'}
+                style={{ height: addPaymentModalHeight }}
+                position='center'
+            >
+                <TouchableOpacity
+                    onPress={() => {
+                        this.setState({
+                            addPaymentModalHeight: addPaymentModalHeight + 200,
+                        });
+                    }}
+                >
+                    <Text>{`${addPaymentModalHeight}`}</Text>
+                </TouchableOpacity>
             </Modal>
         );
     }
 
     render() {
         return (
-            <View style={screenStyles.container}>
+            <Provider style={screenStyles.container}>
                 <AppStatusBar
                     backgroundColor='#011b38'
                     barStyle='light-content'
@@ -195,8 +253,10 @@ export default class BountyDescriptionScreen extends Component {
                     </ScrollView>
                     {this._renderClaimBountyButton()}
                     {this._initVerifyEmailModal()}
+                    {this._initClaimBountyModal()}
+                    {this._initModalAddPayment()}
                 </LinearGradient>
-            </View>
+            </Provider>
         );
     }
 }
@@ -299,53 +359,3 @@ const screenStyles = StyleSheet.create({
     }
 });
 
-const modalVerifyEmail = StyleSheet.create({
-    container: {
-        height: '100%', 
-        backgroundColor: 'white', 
-        borderRadius: 10,
-        alignItems: 'center'
-    },
-
-    verifyTitle: {
-        color: 'black',
-        fontSize: 25,
-        textAlign: 'center',
-        marginHorizontal: 30,
-        fontWeight: 'bold',
-    },
-
-    verifyMessage: {
-        color: 'black',
-        textAlign: 'center',
-        marginHorizontal: 30
-    },
-
-    codeInputText: {
-        width: Dimensions.get('window').width - 40,
-        textAlign: 'center',
-        height: 45,
-        borderRadius: 10,
-        borderColor: 'gray',
-        borderWidth: StyleSheet.hairlineWidth
-    },
-
-    submitButton: {
-        width: Dimensions.get('window').width - 40,
-        height: 45,
-        borderRadius: 10,
-        backgroundColor: '#01254F',
-    },
-
-    subitButtonOnActive: {
-        backgroundColor: '#004aa0', 
-    },
-
-    resendCodeButton: {
-        width: Dimensions.get('window').width - 40,
-        height: 45,
-        borderRadius: 10,
-        borderColor: 'black',
-        borderWidth: StyleSheet.hairlineWidth
-    }
-});
