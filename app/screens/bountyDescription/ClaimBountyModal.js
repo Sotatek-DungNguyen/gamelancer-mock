@@ -8,7 +8,6 @@ import {
     TextInput,
 } from 'react-native';
 import { WhiteSpace, Button, Pagination } from '@ant-design/react-native';
-import Modal from 'react-native-modalbox';
 import Swiper from 'react-native-swiper';
 import TitleBar from '../../components/TitleBar';
 
@@ -97,7 +96,7 @@ export default class ClaimBountyModal extends Component {
 
     _renderClaimBountyAddMessageView() {
         return (
-            <View style={[utilStyles.viewContainer, { backgroundColor: this.props.bak }]}>
+            <View style={utilStyles.viewContainer}>
                 <TitleBar
                     leading={
                         <TouchableOpacity
@@ -144,9 +143,9 @@ export default class ClaimBountyModal extends Component {
     }
 
     _renderClaimBountySummaryView() {
-        const { onClickAddPayment } = this.props;
+        const { onClickAddPayment, onClickPayBounty } = this.props;
         return (
-            <View style={claimBountyStyle.container}>
+            <View style={bountySummaryStyle.container}>
                 <TitleBar
                     leading={
                         <TouchableOpacity
@@ -171,7 +170,7 @@ export default class ClaimBountyModal extends Component {
                     current={3}
                 />
                 <WhiteSpace size='xl' />
-                <View style={bountySummaryStyle.container}>
+                <View style={bountySummaryStyle.overviewBountyContainer}>
                     <View style={bountySummaryStyle.summaryLineContainer}>
                         <Text style={bountySummaryStyle.text}>Date</Text>
                         <Text style={bountySummaryStyle.text}>Now</Text>
@@ -197,6 +196,12 @@ export default class ClaimBountyModal extends Component {
                         <Text style={bountySummaryStyle.finalPrice}>$64</Text>
                     </View>
                 </View>
+                <Button
+                    style={bountySummaryStyle.payButton}
+                    onPress={onClickPayBounty}
+                >
+                    Pay Bounty
+                </Button>
             </View>
         );
     }
@@ -279,6 +284,10 @@ const addMessageStyle = StyleSheet.create({
 
 const bountySummaryStyle = StyleSheet.create({
     container: {
+        flex: 1,
+    },
+
+    overviewBountyContainer: {
         marginHorizontal: 40,
     },
 
@@ -305,4 +314,11 @@ const bountySummaryStyle = StyleSheet.create({
         color: 'black',
         fontWeight: 'bold'
     },
+
+    payButton: { 
+        width: '100%',
+        position: 'absolute',
+        height: 56,
+        bottom: 0 
+    }
 });

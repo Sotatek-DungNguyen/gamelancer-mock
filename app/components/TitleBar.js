@@ -7,16 +7,24 @@ import {
 export default class TitleBar extends Component {
     render() {
         const {
-            leading, title, trailing, backgroundColor, underline = false, underlineColor = "transparent"
+            leading = null, title, trailing = null, backgroundColor, underline = false, underlineColor = "transparent"
         } = this.props;
         return (
             <View>
                 <View style={[screenStyles.container, { backgroundColor }]}>
                     <View style={{ flexDirection: 'row' }}>
-                        <View style={screenStyles.leadingDefault}>{leading}</View>
+                        {
+                            leading != null 
+                            ? <View style={screenStyles.leadingDefault}>{leading}</View>
+                            : null
+                        }
                         <View style={screenStyles.titleDefault}>{title}</View>
                     </View>
-                    <View style={screenStyles.trailingDefault}>{trailing}</View>
+                    {
+                        trailing != null
+                        ? <View style={screenStyles.trailingDefault}>{trailing}</View>
+                        : null
+                    }
                 </View>
                 {
                     underline

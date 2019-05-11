@@ -6,28 +6,29 @@ import {
     Text,
     StyleSheet,
     Image,
-    Dimensions,
-    TextInput
 } from 'react-native';
 import LinearGradient from 'react-native-linear-gradient';
 import Tags from "react-native-tags";
-import Modal from 'react-native-modalbox';
-import { WhiteSpace, Button, Provider } from '@ant-design/react-native';
-import { Modal as AntDesignModal } from '@ant-design/react-native';
+import ModalBox from 'react-native-modalbox';
+import { WhiteSpace, Provider, Modal as AntDesignModal } from '@ant-design/react-native';
 
 import TitleBar from '../../components/TitleBar';
 import AppStatusBar from '../../components/AppStatusBar';
 import VerifyAccountModal from './VerifyAccountModal';
 import ClaimBountyModal from './ClaimBountyModal';
+import AddPaymentMethodModal from './AddPaymentMethodModal';
+import SentPayBountyRequestModal from './SentPayBountyRequestModal';
 
 const CLAIM_BOUNTY_BUTTON_HEIGHT = 53;
 
+//Every modal view have contained to a component view. You can pass props or use redux to get data.
 export default class BountyDescriptionScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             showClaimBountyModalContent: false,
-            addPaymentModalHeight: 200,
+            showAddPaymentModal: false,
+            addPaymentHeight: 100,
         }
     }
 
@@ -38,12 +39,25 @@ export default class BountyDescriptionScreen extends Component {
             this.setState({
                 showClaimBountyModalContent: true,
             });
-        }, 100);
+        }, 50);
     }
 
+    //Call this to rerender Swiper after Modal has hidden.
     _hideClaimBountyModalContent = () => {
         this.setState({
             showClaimBountyModalContent: false,
+        });
+    }
+
+    _showAddPaymentModal = () => {
+        this.setState({
+            showAddPaymentModal: true,
+        });
+    }
+
+    _hideAddPaymentModal = () => {
+        this.setState({
+            showAddPaymentModal: false,
         });
     }
 
@@ -168,7 +182,7 @@ export default class BountyDescriptionScreen extends Component {
 
     _initVerifyEmailModal() {
         return (
-            <Modal
+            <ModalBox
                 ref={"modalVerifyEmail"}
                 swipeToClose={false}
                 position='bottom'
@@ -183,7 +197,7 @@ export default class BountyDescriptionScreen extends Component {
                     }}
                     onClickResendCode={() => alert("Resend Code")}
                 />
-            </Modal>
+            </ModalBox>
         );
     }
 
@@ -195,11 +209,16 @@ export default class BountyDescriptionScreen extends Component {
                     this.refs.modalClaimBounty.close();
                     this._hideClaimBountyModalContent();
                 }}
-                onClickAddPayment={() => this.refs.modalAddPayment.open()}
+                onClickAddPayment={this._showAddPaymentModal}
+                onClickPayBounty={() => {
+                    this.refs.modalClaimBounty.close();
+                    this._hideClaimBountyModalContent();
+                    this.refs.modalSentPayBuontyRequest.open();
+                }}
             />
         );
         return (
-            <Modal
+            <ModalBox
                 ref={"modalClaimBounty"}
                 backdropPressToClose={false}
                 swipeToClose={false}
@@ -211,28 +230,43 @@ export default class BountyDescriptionScreen extends Component {
                 {
                     showClaimBountyModalContent ? modalContent : null
                 }
-            </Modal>
+            </ModalBox>
         );
     }
 
     _initModalAddPayment() {
-        const { addPaymentModalHeight } = this.state;
+        const { showAddPaymentModal } = this.state;
         return (
-            <Modal
-                ref={'modalAddPayment'}
-                style={{ height: addPaymentModalHeight }}
-                position='center'
+            <AntDesignModal
+                title={
+                    <Text style={screenStyles.addPaymentModalTitle}>Add Payment Method</Text>
+                }
+                visible={showAddPaymentModal}
+                onClose={this._hideAddPaymentModal}
+                transparent
+                maskClosable
+                bodyStyle={{ marginLeft: 0 }}
             >
-                <TouchableOpacity
-                    onPress={() => {
-                        this.setState({
-                            addPaymentModalHeight: addPaymentModalHeight + 200,
-                        });
-                    }}
-                >
-                    <Text>{`${addPaymentModalHeight}`}</Text>
-                </TouchableOpacity>
-            </Modal>
+                <AddPaymentMethodModal />
+            </AntDesignModal>
+        );
+    }
+
+    _initSentPayBuontyRequestModal() {
+        return (
+            <ModalBox
+                ref={"modalSentPayBuontyRequest"}
+                backdropPressToClose={false}
+                swipeToClose={false}
+                position='bottom'
+                backButtonClose={true}
+                onClosed={this._hideClaimBountyModalContent}
+                style={{ height: 400 }}
+            >
+                <SentPayBountyRequestModal
+                    onClickEndButton={() => this.refs.modalSentPayBuontyRequest.close()}
+                />
+            </ModalBox>
         );
     }
 
@@ -255,6 +289,7 @@ export default class BountyDescriptionScreen extends Component {
                     {this._initVerifyEmailModal()}
                     {this._initClaimBountyModal()}
                     {this._initModalAddPayment()}
+                    {this._initSentPayBuontyRequestModal()}
                 </LinearGradient>
             </Provider>
         );
@@ -356,6 +391,11 @@ const screenStyles = StyleSheet.create({
         alignSelf: 'center',
         color: 'white',
         fontSize: 18
+    },
+
+    addPaymentModalTitle: {
+        color: 'black',
+        fontWeight: 'bold'
     }
 });
 
