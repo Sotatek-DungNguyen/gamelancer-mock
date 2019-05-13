@@ -11,6 +11,7 @@ import ChatDetailScreen from './app/screens/chats/ChatDetailScreen';
 import SessionScreen from './app/screens/session/SessionScreen';
 import ReviewScreen from './app/screens/review/ReviewScreen';
 import PayScreen from './app/screens/pay/PayScreen';
+import SessionSummaryScreen from './app/screens/session/SessionSummaryScreen';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => PayScreen);
+AppRegistry.registerComponent(appName, () => SessionSummaryScreen);
