@@ -6,20 +6,21 @@ import PaymentModal from '../components/PaymentModal';
 export default class HomeScreen extends Component {
     state = {
         isInNotification: false,
-        numOfNotification: 1,
+        numOfNotification: 99,
     }
 
     _renderIconNotification() {
-        // const img = this.state.isInNotification ?
-        //     require('../../../assets/ic_bounty_flow/ic_notifications_active.png') :
-        //     require('../../../assets/ic_bounty_flow/ic_notifications.png')
-
         if (this.state.numOfNotification !== 0 && !this.state.isInNotification) {
             return (
                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                     <Image source={require('../../../assets/ic_bounty_flow/ic_notifications.png')} />
                     <View style={{ zIndex: 1000, position: 'absolute', bottom: 0, left: 20, width: 20, height: 20, borderRadius: 10, backgroundColor: 'red', alignItems: 'center', justifyContent: 'center' }}>
-                        <Text style={{ color: 'white' }}>{this.state.numOfNotification}</Text>
+                        <Text
+                            numberOfLines={1}
+                            style={{ color: 'white' }}
+                        >
+                            {this.state.numOfNotification}
+                        </Text>
                     </View>
                 </View>
             )

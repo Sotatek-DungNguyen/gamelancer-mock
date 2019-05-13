@@ -105,7 +105,8 @@ export default class PostBountyScreen extends Component {
                             <Text style={PostBountyStyles.normalText}>Description</Text>
                             <TextInput
                                 numberOfLines={1}
-                                style={PostBountyStyles.inputTitle} />
+                                style={PostBountyStyles.inputTitle}
+                            />
                         </View>
 
                         {/* Service */}
