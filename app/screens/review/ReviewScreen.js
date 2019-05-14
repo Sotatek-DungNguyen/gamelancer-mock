@@ -1,14 +1,15 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity, TouchableWithoutFeedback,
   Dimensions } from 'react-native';
-import { Rating, AirbnbRating } from 'react-native-elements';
+import { Rating } from 'react-native-elements';
+import { CommonStyles } from '../../utils/CommonStyles';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 export default class ReviewScreen extends Component {
   constructor(props){
     super(props);
     this.state = {
-      rating: null,
+      rating: 0,
       tips: [
         { isSelected: false, value: 5 },
         { isSelected: false, value: 15 },
@@ -43,37 +44,39 @@ export default class ReviewScreen extends Component {
   _renderHeader() {
     return (
       <View style={styles.header}>
-        <View style={{ flex: 1, backgroundColor: '#9E9E9E', alignItems: 'center', justifyContent: 'space-evenly', }}>
-          <Image
-            style={{ height: 208, position: 'absolute' }}
-            resizeMode='stretch'
+        <Image
+          style={{ height: 256, position: 'absolute' }}
+          resizeMode='stretch'
+          />
+        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'space-evenly', }}>
+          <Image style={{ width: 56, height: 56, borderRadius: 28}}
+            source={require('../../assets/image/user.png')}
             />
-          <Image style={{ width: 56, height: 56, backgroundColor: 'grey', borderRadius: 28}}
-            />
-          <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black'}}>gamelancerusername</Text>
+          <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black'}}>Gamerlancer</Text>
           <Rating
             type='star'
             ratingCount={5}
             imageSize={24}
             onFinishRating={this._ratingCompleted}/>
-          <TouchableOpacity style={{ paddingVertical: 6, paddingHorizontal: 16, backgroundColor: 'grey'}}
+          <TouchableOpacity style={{ paddingVertical: 6, paddingHorizontal: 16, backgroundColor: '#E0E0E0'}}
             onPress={ () => {
 
             }}>
-            <Text>{'give a compliment'.toUpperCase()}</Text>
+            <Text style={{ fontSize: 12, color: 'black'}}>{'give a compliment'.toUpperCase()}</Text>
           </TouchableOpacity>
         </View>
+        <View style={{ height: 1, backgroundColor: 'black'}}/>
       </View>
     );
   }
 
-  _renderBody() {
+  _renderMainContent() {
     console.log('==============================================');
     console.log(this.state.tips);
     console.log('==============================================');
     return (
-      <View style={{ alignItems: 'center', marginTop: 48}}>
-        <Text style={{ fontSize: 20, fontWeight: 'bold', color: 'black'}}>Add a tip for</Text>
+      <View style={{ alignItems: 'center', marginTop: 32}}>
+        <Text style={{ fontSize: 20, fontWeight: 'bold', color: '#424242'}}>Add a tip for</Text>
         <Text>The session was 3h @ $24,12</Text>
         <View style={{ width: width, marginTop: 16, flexDirection: 'row', justifyContent: 'space-around', }}>
           {this.state.tips.map((item, index) => {
@@ -85,18 +88,18 @@ export default class ReviewScreen extends Component {
                 }}>
                 <View
                   style={{ width: 56, height: 56, backgroundColor: !item.isSelected ? '#EEEEEE' : 'grey', borderRadius: 28, justifyContent: 'center', alignItems: 'center'}}>
-                  <Text style={{ color: 'black'}}>{`$${item.value}`}</Text>
+                  <Text style={{ fontSize: 16, fontWeight: 'bold', color: 'black'}}>{`$${item.value}`}</Text>
                 </View>
               </TouchableWithoutFeedback>
             );
           })}
         </View>
         <Text style={{ marginTop: 32}}>Enter custom amount</Text>
-        <TouchableOpacity style={{ marginTop: 36, paddingHorizontal: 156, paddingVertical: 20, backgroundColor: '#EEEEEE' }}>
-          <Text>Next</Text>
+        <TouchableOpacity style={[ CommonStyles.buttonSubmit, { marginTop: 32, paddingHorizontal: 156 }]}>
+          <Text style={{ fontSize: 16}}>Next</Text>
         </TouchableOpacity>
-        <TouchableOpacity style={{ marginTop: 8, paddingHorizontal: 156, paddingVertical: 20, backgroundColor: '#EEEEEE' }}>
-          <Text>Skip</Text>
+        <TouchableOpacity style={[ CommonStyles.buttonSubmit, { marginTop: 16, paddingHorizontal: 156 }]}>
+          <Text style={{ fontSize: 16}}>Skip</Text>
         </TouchableOpacity>
       </View>
     );
@@ -106,7 +109,7 @@ export default class ReviewScreen extends Component {
     return (
       <View style={styles.container}>
         {this._renderHeader()}
-        {this._renderBody()}
+        {this._renderMainContent()}
       </View>
     );
   }

@@ -14,4 +14,4 @@ import PayScreen from './app/screens/pay/PayScreen';
 import SessionSummaryScreen from './app/screens/session/SessionSummaryScreen';
 import {name as appName} from './app.json';
 
-AppRegistry.registerComponent(appName, () => SessionSummaryScreen);
+AppRegistry.registerComponent(appName, () => BountyListScreen);

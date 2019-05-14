@@ -1,8 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, TextInput } from 'react-native';
-import { CheckBox } from 'react-native-elements'
-import Item from '@ant-design/react-native/lib/list/ListItem';
 import { TouchableOpacity } from 'react-native-gesture-handler';
+import { CommonStyles, CommonColors } from '../../utils/CommonStyles';
 
 export default class PayScreen extends Component {
   constructor(props){
@@ -46,8 +45,8 @@ export default class PayScreen extends Component {
             value={this.state.text}
           />
         </View>
-        <TouchableOpacity style={{ marginTop: 32, marginHorizontal: 20, paddingVertical: 20, backgroundColor: 'grey', alignItems: 'center'}}>
-          <Text>{`Pay $${this.state.price}`}</Text>
+        <TouchableOpacity style={[CommonStyles.buttonSubmit, { marginTop: 32 } ]}>
+          <Text style={{ fontSize: 16}}>{`Pay $${this.state.price}`}</Text>
         </TouchableOpacity>
         </View>
       </View>
@@ -69,7 +68,7 @@ const styles = StyleSheet.create({
   textTitle: {
     fontSize: 20,
     fontWeight: 'bold',
-    color: 'black'
+    color: CommonColors.grey900
   },
   titleContainer: {
     paddingHorizontal: 32,

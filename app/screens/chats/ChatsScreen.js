@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { CommonStyles } from '../../utils/CommonStyles';
 
 export default class ChatsScreen extends Component {
   constructor(props){
@@ -25,7 +26,7 @@ export default class ChatsScreen extends Component {
     return (
       <View style={ styles.conversation }>
         <Image 
-          style={ styles.avatar }
+          style={ CommonStyles.bigCircleAvatar }
           source={require('../../assets/image/user.png')}/>
         <View style={ styles.contentConversation }>
           <Text style={{ fontSize: 16, maxWidth: 260 }} numberOfLines={1} >{item.name}</Text>
@@ -33,7 +34,7 @@ export default class ChatsScreen extends Component {
         </View>
         {(type === 'New claims') ? (
           <View>
-            <View style={ styles.badge }>
+            <View style={ [CommonStyles.smallCircleAvatar, { backgroundColor: 'red', alignItems: 'center', justifyContent: 'center'}] }>
               <Text style={{ color: 'white' }}>1</Text>
             </View>
             <Text style={{ fontSize: 10}}>14:02</Text>
@@ -84,22 +85,9 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  avatar: {
-    width: 48,
-    height: 48,
-    borderRadius: 24 
-  },
   contentConversation: {
     marginLeft: 16,
     flex: 1
-  },
-  badge: {
-    width: 24,
-    height: 24,
-    borderRadius: 12,
-    backgroundColor: 'red',
-    alignItems: 'center',
-    justifyContent: 'center'
   },
   divider: {
     height: 0.5,

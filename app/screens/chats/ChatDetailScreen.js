@@ -2,8 +2,8 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet, FlatList, Image, TextInput, TouchableOpacity,
   Dimensions } from 'react-native';
 import Modal from "react-native-modal";
+import { CommonStyles } from '../../utils/CommonStyles';
 
-const { height } = Dimensions.get('window');
 export default class ChatsScreen extends Component {
   constructor(props){
     super(props);
@@ -32,10 +32,10 @@ export default class ChatsScreen extends Component {
             <Text style={{ fontSize: 10}}>14:02</Text>
           </View>
         </View>
-        <View style={{ marginTop: 8}}>
-          <Image style={ styles.avatar }
-            source={require('../../assets/image/user.png')}/>
-        </View>
+        <Image
+          style={[CommonStyles.smallCircleAvatar, { marginTop: 8 }]}
+          source={require('../../assets/image/user.png')}
+          />
       </View>
     );
   }
@@ -108,12 +108,12 @@ export default class ChatsScreen extends Component {
       </View>
       <View style={{ flexDirection: 'row', justifyContent: 'space-between'}}>
         <TouchableOpacity
-          style={{ height: 56, width: 150, alignItems: 'center', borderWidth: 1, padding: 16 }}
+          style={[CommonStyles.buttonSubmit, { width: 150 }]}
           onPress={() => this.setModalVisible(false)} >
           <Text>Cancel</Text>
         </TouchableOpacity>
         <TouchableOpacity
-          style={{ height: 56, width: 150, alignItems: 'center', borderWidth: 1, padding: 16 }}
+          style={[ CommonStyles.buttonSubmit, { width: 150 }]}
           onPress={() => this.setModalVisible(false)} >
           <Text>Confirm</Text>
         </TouchableOpacity>

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity } from 'react-native';
 import HeaderComp from './HeaderComp';
-import Modal from "react-native-modal";
+import { CommonStyles } from '../../utils/CommonStyles';
 
 export default class SessionSummaryScreen extends Component {
   constructor(props){
@@ -16,6 +16,7 @@ export default class SessionSummaryScreen extends Component {
     return (
       <HeaderComp
         avatar={require('../../assets/image/user.png')}
+        thumb={require('../../assets/image/background.jpg')}
         isTip={false}
         onTipPress={ () => {
           this.setModalVisible(true);
@@ -24,10 +25,10 @@ export default class SessionSummaryScreen extends Component {
     );
   }
 
-  _renderBody() {
+  _renderMainContent() {
     return (
       <View style={{ flex: 1, justifyContent: 'space-around' }}>
-        <View style={{ padding: 20 }}>
+        <View style={{ paddingHorizontal: 32 }}>
           <Text style={ styles.textSection }>Time Played</Text>
           <View style={{  marginTop: 20, flexDirection: 'row' }}>
             <Text style={ [ styles.textValue, { flex: 1 } ]}>2:48:12</Text>
@@ -43,7 +44,7 @@ export default class SessionSummaryScreen extends Component {
             <Text style={ styles.textValue }>$165</Text>
           </View>
         </View>
-        <TouchableOpacity style={ styles.buttonNext }>
+        <TouchableOpacity style={ CommonStyles.buttonSubmit }>
           <Text>Next</Text>
         </TouchableOpacity>
       </View>
@@ -54,7 +55,7 @@ export default class SessionSummaryScreen extends Component {
     return (
       <View style={ styles.container}>
         {this._renderHeader()}
-        {this._renderBody()}
+        {this._renderMainContent()}
       </View>
     );
   }
@@ -71,17 +72,10 @@ const styles = StyleSheet.create({
   textSection: {
     fontSize: 16,
     fontWeight: 'bold',
-    color: '#344955',
+    color: '#424242',
   },
   textValue: {
     fontSize: 16,
-    fontWeight: 'bold',
     color: 'black',
   },
-  buttonNext: {
-    paddingVertical: 20,
-    marginHorizontal: 16,
-    backgroundColor: 'grey',
-    alignItems: 'center',
-  }
 })

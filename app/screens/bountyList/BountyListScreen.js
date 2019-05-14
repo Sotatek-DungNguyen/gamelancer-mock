@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet, FlatList, Image, Dimensions, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, FlatList, Image, TouchableOpacity } from 'react-native';
+import { CommonStyles } from '../../utils/CommonStyles';
 
 export default class BountyListScreen extends Component {
   constructor(props){
@@ -51,7 +52,7 @@ export default class BountyListScreen extends Component {
       <View style={ styles.bountyItem }>
         <View>
           <Image source={require('../../assets/image/pubg.png')} style={{width: 190, height: 110}} resizeMode='cover'/>
-          <Image source={require('../../assets/image/user.png')} style={{ width: 32, height: 32, backgroundColor: '#BDBDBD', borderRadius: 25, position: 'absolute', marginTop: 94, marginLeft: 16}}/>
+          <Image source={require('../../assets/image/user.png')} style={ styles.circlerAvatar }/>
         </View>
         <View style={{ marginTop: 24, marginHorizontal: 8, flexDirection: "row", justifyContent: 'space-between'}}>
           <Text style={{ fontWeight: 'bold', maxWidth: 120}}>{item.title}</Text>
@@ -85,6 +86,7 @@ const styles = StyleSheet.create({
     backgroundColor: '#EEEEEE',
   },
   header: {
+    paddingLeft: 16,
     height: 56,
     justifyContent: 'center',
   },
@@ -97,6 +99,11 @@ const styles = StyleSheet.create({
     marginLeft: 8,
     backgroundColor: 'white',
   },
+  circlerAvatar: {
+    ...CommonStyles.mediumCircleAvatar,
+    position: 'absolute',
+    marginTop: 94,
+    marginLeft: 16 },
   tags: {
     marginTop: 40,
     flexDirection: 'row',

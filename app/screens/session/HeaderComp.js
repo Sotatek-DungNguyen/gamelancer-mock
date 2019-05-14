@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Image, TouchableOpacity,
   Dimensions } from 'react-native';
-import Modal from "react-native-modal";
+  import { CommonStyles } from '../../utils/CommonStyles';
 
-const { width, height } = Dimensions.get('window');
+const { width } = Dimensions.get('window');
 export default class HeaderComp extends Component {
   constructor(props){
     super(props);
@@ -19,9 +19,8 @@ export default class HeaderComp extends Component {
             resizeMode='stretch'
             source={thumb}
             />
-          <Image style={{ width: 40, height: 40, backgroundColor: 'grey', borderRadius: 24}}
+          <Image style={ CommonStyles.bigCircleAvatar }
             source={avatar}/>
-
           <Text style={{ fontWeight: 'bold', fontSize: 20, color: 'black'}}>gamelancerusername</Text>
         </View>
         {isTip ? (
