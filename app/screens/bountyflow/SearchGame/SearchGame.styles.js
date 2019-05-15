@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 import colors from '../Colors';
 
-const { width, height } = Dimensions.get('screen');
+const { width, height } = Dimensions.get('window');
 
 const SearchGameStyles = StyleSheet.create({
     container: {

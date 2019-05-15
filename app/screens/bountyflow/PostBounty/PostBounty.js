@@ -49,8 +49,7 @@ export default class PostBounty extends Component {
             </TouchableOpacity>
     }
 
-    _postBounty = () => {
-    }
+    _postBounty = () => {}
     render() {
         return (
             <View style={PostBountyStyles.container}>
