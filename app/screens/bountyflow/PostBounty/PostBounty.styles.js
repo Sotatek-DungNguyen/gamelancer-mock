@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 
-const { width, height } = Dimensions.get('screen');
+const { width, height } = Dimensions.get('window');
 
 const PostBountyStyles = StyleSheet.create({
     container: {
