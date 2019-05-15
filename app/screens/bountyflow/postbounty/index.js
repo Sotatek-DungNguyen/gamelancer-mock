@@ -1,2 +1,2 @@
-import PostBountyScreen from './PostBountyScreen';
-export default PostBountyScreen;
+import PostBounty from './PostBounty';
+export default PostBounty;

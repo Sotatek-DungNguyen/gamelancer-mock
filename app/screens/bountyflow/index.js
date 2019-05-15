@@ -1,6 +1,6 @@
-import SearchGameScreen from './search';
-import PostBountyScreen from './postbounty';
-import EditBountyScreen from './postbounty/EditBountyScreen';
+import SearchGame from './SearchGame';
+import PostBounty from './PostBounty';
+import EditBounty from './EditBounty';
 import HomeScreen from './Home';
 import PaymentModal from '../bountyflow/components/PaymentModal';
 
@@ -9,9 +9,9 @@ import { createAppContainer, createStackNavigator } from 'react-navigation';
 const BountyStack = createStackNavigator(
     {
         Home: HomeScreen,
-        Search: SearchGameScreen,
-        Post: PostBountyScreen,
-        Edit: EditBountyScreen,
+        Search: SearchGame,
+        Post: PostBounty,
+        Edit: EditBounty,
         Pay: PaymentModal
     },
     {

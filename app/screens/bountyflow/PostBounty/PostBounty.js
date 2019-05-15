@@ -8,10 +8,10 @@ import {
     StyleSheet,
     TouchableOpacity,
 } from 'react-native';
-import PostBountyStyles from './PostBountyStyles';
-import ItemPlatform from './ItemPlatform';
+import PostBountyStyles from './PostBounty.styles';
+import PostBountyItemPlatform from './PostBountyItemPlatform'
 
-export default class PostBountyScreen extends Component {
+export default class PostBounty extends Component {
     constructor(props) {
         super(props)
     }
@@ -76,9 +76,9 @@ export default class PostBountyScreen extends Component {
                         <View style={PostBountyStyles.platform}>
                             <Text style={PostBountyStyles.largText}>Platform</Text>
                             <View style={PostBountyStyles.itemPlatform}>
-                                <ItemPlatform title='PS4' />
-                                <ItemPlatform title='Xbox One' />
-                                <ItemPlatform title='Nintendo Switch' />
+                                <PostBountyItemPlatform title='PS4' />
+                                <PostBountyItemPlatform title='Xbox One' />
+                                <PostBountyItemPlatform title='Nintendo Switch' />
                             </View>
                         </View>
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, Text, Image, TouchableOpacity } from 'react-native';
 
 
-export default class ItemPlatform extends Component {
+export default class PostBountyItemPlatform extends Component {
     constructor(props) {
         super(props)
     }

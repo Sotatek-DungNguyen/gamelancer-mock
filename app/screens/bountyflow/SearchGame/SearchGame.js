@@ -9,11 +9,10 @@ import {
     FlatList,
     TextInput
 } from 'react-native';
-import SearchStyles from './SearchStyles';
+import SearchGameStyles from './SearchGame.styles';
 
-const { width, height } = Dimensions.get('screen');
 
-export default class SearchGameSceen extends Component {
+export default class SearchGame extends Component {
 
     constructor(props) {
         super(props)
@@ -42,10 +41,10 @@ export default class SearchGameSceen extends Component {
     _renderItem = ({ item, index }) => (
         < TouchableOpacity
             onPress={() => this._selectItem({ item, index })}
-            style={item.isSelect ? SearchStyles.itemSelected : SearchStyles.item}
+            style={item.isSelect ? SearchGameStyles.itemSelected : SearchGameStyles.item}
         >
-            <Image style={SearchStyles.imageGame} source={item.image} />
-            <Text style={SearchStyles.titleGame}>{item.name}</Text>
+            <Image style={SearchGameStyles.imageGame} source={item.image} />
+            <Text style={SearchGameStyles.titleGame}>{item.name}</Text>
             {this._showIconSelect(item.isSelect)}
         </TouchableOpacity>
     )
@@ -83,7 +82,7 @@ export default class SearchGameSceen extends Component {
     _showIconSearch = () => {
         if (!this.state.searching) {
             return (
-                <Image style={SearchStyles.iconSearch} source={require('../../../assets/ic_bounty_flow/searchwhite.png')} />
+                <Image style={SearchGameStyles.iconSearch} source={require('../../../assets/ic_bounty_flow/searchwhite.png')} />
             )
         }
     }
@@ -94,18 +93,18 @@ export default class SearchGameSceen extends Component {
 
     render() {
         return (
-            <View style={SearchStyles.container}>
-                <View style={SearchStyles.header}>
+            <View style={SearchGameStyles.container}>
+                <View style={SearchGameStyles.header}>
                     {this._showIconSearch()}
                     <TextInput
-                        style={SearchStyles.inputSearch}
+                        style={SearchGameStyles.inputSearch}
                         placeholder='            Search a game'
                         placeholderTextColor='white'
                         onFocus={() => this.setState({ searching: true })}
                     />
 
                 </View>
-                <View style={SearchStyles.body}>
+                <View style={SearchGameStyles.body}>
                     <FlatList
                         style={{ flex: 1, margin: 10 }}
                         data={this.state.data}
@@ -114,12 +113,12 @@ export default class SearchGameSceen extends Component {
                         numColumns={3}
                     />
                 </View>
-                <View style={SearchStyles.bottom}>
+                <View style={SearchGameStyles.bottom}>
                     <TouchableOpacity
-                        style={SearchStyles.buttonNext}
+                        style={SearchGameStyles.buttonNext}
                         onPress={() => this._onNext()}
                     >
-                        <Text style={SearchStyles.nextText}>NEXT</Text>
+                        <Text style={SearchGameStyles.nextText}>NEXT</Text>
                     </TouchableOpacity>
                 </View>
 

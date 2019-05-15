@@ -11,7 +11,7 @@ export default class PaymentModal extends Component {
 
     state = {
         popupVisible: false,
-        indexCurrentRadioSelected: -1,
+        indexCurrentRadioSelected: 2,
         radioButtons: [
             {
                 title: 'Gamelancer funds($0)',
@@ -23,7 +23,7 @@ export default class PaymentModal extends Component {
             },
             {
                 title: 'Credit card',
-                checked: false
+                checked: true
             }
         ]
     }
@@ -212,7 +212,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
         backgroundColor: '#EEEEEE',
-        margin:30,
+        margin: 30,
     },
     textButtonPay: {
         fontSize: 18,

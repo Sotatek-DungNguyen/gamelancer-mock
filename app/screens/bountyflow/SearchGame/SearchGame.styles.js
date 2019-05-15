@@ -5,11 +5,10 @@ import {
     StyleSheet
 } from 'react-native';
 import colors from '../Colors';
-import FontSize from '../FontSize';
 
 const { width, height } = Dimensions.get('screen');
 
-const SearchStyles = StyleSheet.create({
+const SearchGameStyles = StyleSheet.create({
     container: {
         flex: 1
     },
@@ -97,4 +96,4 @@ const SearchStyles = StyleSheet.create({
     }
 });
 
-export default SearchStyles;
+export default SearchGameStyles;

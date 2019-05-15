@@ -10,11 +10,10 @@ import {
     TouchableOpacity,
     TouchableWithoutFeedback
 } from 'react-native';
+import EditBountyStyles from './EditBounty.styles';
+import PostBountyItemPlatform from '../PostBounty/PostBountyItemPlatform';
 
-import PostBountyStyles from './PostBountyStyles';
-import ItemPlatform from './ItemPlatform';
-
-export default class EditBountyScreen extends Component {
+export default class EditBounty extends Component {
     constructor(props) {
         super(props)
     }
@@ -69,21 +68,21 @@ export default class EditBountyScreen extends Component {
                 }}>
                 <TouchableOpacity
                     onPressOut={() => this._setVisibleRemoveModal(false)}
-                    style={PostBountyStyles.modalRemoveContainer}
+                    style={EditBountyStyles.modalRemoveContainer}
                 >
                     <TouchableWithoutFeedback>
-                        <View style={PostBountyStyles.modalRemove}>
+                        <View style={EditBountyStyles.modalRemove}>
                             <Text style={{ fontWeight: 'bold' }}>Are you sure you want</Text>
                             <Text style={{ fontWeight: 'bold' }}>to remove this bounty?</Text>
-                            <View style={[PostBountyStyles.buttonRemoveSaveContainer, { top: 30 }]}>
-                                <TouchableOpacity style={PostBountyStyles.buttonRemove_Save}>
-                                    <Text style={PostBountyStyles.largText}>Remove Bounty</Text>
+                            <View style={[EditBountyStyles.buttonRemoveSaveContainer, { top: 30 }]}>
+                                <TouchableOpacity style={EditBountyStyles.buttonRemove_Save}>
+                                    <Text style={EditBountyStyles.largText}>Remove Bounty</Text>
                                 </TouchableOpacity>
                                 <TouchableOpacity
                                     onPress={() => this._setVisibleRemoveModal(false)}
-                                    style={[PostBountyStyles.buttonRemove_Save, { backgroundColor: '#E0E0E0' }]}
+                                    style={[EditBountyStyles.buttonRemove_Save, { backgroundColor: '#E0E0E0' }]}
                                 >
-                                    <Text style={PostBountyStyles.largText}>Cancel</Text>
+                                    <Text style={EditBountyStyles.largText}>Cancel</Text>
                                 </TouchableOpacity>
                             </View>
                         </View>
@@ -95,10 +94,10 @@ export default class EditBountyScreen extends Component {
 
     render() {
         return (
-            <View style={PostBountyStyles.container}>
+            <View style={EditBountyStyles.container}>
 
                 {/* Header */}
-                <View style={PostBountyStyles.header}>
+                <View style={EditBountyStyles.header}>
                     <TouchableOpacity>
                         <Image source={require('../../../assets/ic_bounty_flow/back16.png')} />
                     </TouchableOpacity>
@@ -109,45 +108,45 @@ export default class EditBountyScreen extends Component {
                 </View>
 
                 {/* Body */}
-                <View style={PostBountyStyles.body}>
+                <View style={EditBountyStyles.body}>
                     <ScrollView
                         showsVerticalScrollIndicator={false}
                         style={{ flex: 1 }}
                     >
                         {/* Platform */}
-                        <View style={PostBountyStyles.platform}>
-                            <Text style={PostBountyStyles.largText}>Platform</Text>
-                            <View style={PostBountyStyles.itemPlatform}>
-                                <ItemPlatform title='PS4' />
-                                <ItemPlatform title='Xbox One' />
-                                <ItemPlatform title='Nintendo Switch' />
+                        <View style={EditBountyStyles.platform}>
+                            <Text style={EditBountyStyles.largText}>Platform</Text>
+                            <View style={EditBountyStyles.itemPlatform}>
+                                <PostBountyItemPlatform title='PS4' />
+                                <PostBountyItemPlatform title='Xbox One' />
+                                <PostBountyItemPlatform title='Nintendo Switch' />
                             </View>
                         </View>
 
                         {/* thumbnail */}
                         <View >
-                            <TouchableOpacity style={PostBountyStyles.thumbnail}>
-                                <Text style={PostBountyStyles.normalText}>Upload a thumbnail</Text>
+                            <TouchableOpacity style={EditBountyStyles.thumbnail}>
+                                <Text style={EditBountyStyles.normalText}>Upload a thumbnail</Text>
                             </TouchableOpacity>
                         </View>
 
                         {/* title */}
-                        <View style={PostBountyStyles.title}>
-                            <Text style={PostBountyStyles.normalText}>Title</Text>
+                        <View style={EditBountyStyles.title}>
+                            <Text style={EditBountyStyles.normalText}>Title</Text>
                             <TextInput
                                 numberOfLines={1}
-                                style={PostBountyStyles.inputTitle} />
+                                style={EditBountyStyles.inputTitle} />
                         </View>
 
                         {/* Service */}
-                        <View style={PostBountyStyles.title}>
-                            <Text style={PostBountyStyles.normalText}>Service</Text>
+                        <View style={EditBountyStyles.title}>
+                            <Text style={EditBountyStyles.normalText}>Service</Text>
                             <View style={{ alignItems: 'center', justifyContent: 'space-between', flexDirection: 'row', marginTop: 10 }}>
-                                <View style={PostBountyStyles.itemService}>
+                                <View style={EditBountyStyles.itemService}>
                                     {this._showRadioButton(this.state.isTraining)}
                                     <Text style={{ color: 'black' }}> Training</Text>
                                 </View>
-                                <View style={PostBountyStyles.itemService}>
+                                <View style={EditBountyStyles.itemService}>
                                     {this._showRadioButton(this.state.isPlayAlong)}
                                     <Text style={{ color: 'black' }}>Play along</Text>
                                 </View>
@@ -155,20 +154,20 @@ export default class EditBountyScreen extends Component {
                         </View>
 
                         {/* Price/hr - Session time */}
-                        <View style={PostBountyStyles.priceSession}>
-                            <View style={PostBountyStyles.price}>
-                                <Text style={PostBountyStyles.normalText}>Price/hr</Text>
+                        <View style={EditBountyStyles.priceSession}>
+                            <View style={EditBountyStyles.price}>
+                                <Text style={EditBountyStyles.normalText}>Price/hr</Text>
                                 <TextInput
                                     placeholder='$32'
                                     placeholderTextColor='gray'
                                     numberOfLines={1}
-                                    style={PostBountyStyles.inputPrice} />
+                                    style={EditBountyStyles.inputPrice} />
                             </View>
-                            <View style={PostBountyStyles.price}>
-                                <Text style={PostBountyStyles.normalText}>Session time</Text>
+                            <View style={EditBountyStyles.price}>
+                                <Text style={EditBountyStyles.normalText}>Session time</Text>
                                 <TextInput
                                     numberOfLines={1}
-                                    style={PostBountyStyles.inputPrice}
+                                    style={EditBountyStyles.inputPrice}
                                 />
                             </View>
                         </View>
@@ -176,15 +175,15 @@ export default class EditBountyScreen extends Component {
                     </ScrollView>
                 </View>
                 {/* Button Remove - Save */}
-                <View style={PostBountyStyles.buttonRemoveSaveContainer}>
+                <View style={EditBountyStyles.buttonRemoveSaveContainer}>
                     <TouchableOpacity
                         onPress={() => this._setVisibleRemoveModal(true)}
-                        style={PostBountyStyles.buttonRemove_Save}
+                        style={EditBountyStyles.buttonRemove_Save}
                     >
-                        <Text style={PostBountyStyles.largText}>Remove Bounty</Text>
+                        <Text style={EditBountyStyles.largText}>Remove Bounty</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity style={[PostBountyStyles.buttonRemove_Save, { backgroundColor: '#E0E0E0' }]}>
-                        <Text style={PostBountyStyles.largText}>Save</Text>
+                    <TouchableOpacity style={[EditBountyStyles.buttonRemove_Save, { backgroundColor: '#E0E0E0' }]}>
+                        <Text style={EditBountyStyles.largText}>Save</Text>
                     </TouchableOpacity>
                 </View>
 

@@ -9,6 +9,7 @@ const DARK_BLUE_2 = '#122A54';
 const LIGHT_BLUE = '#ADD8E6';
 const DARK_GRAY = '#2F4F4F';
 const AQUA = '#00FFFF';
+
 const GRAY = '#808080';
 
 
